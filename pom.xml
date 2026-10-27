@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- pom.xml = Maven's project file. It describes the project, its libraries and how to build and run it. -->
+    <!-- Version of the POM format itself (always 4.0.0 for Maven 3 and 4). -->
+    <modelVersion>4.0.0</modelVersion>
+    <!-- Project identity: groupId (like a company/package name), artifactId (project name), version. -->
+    <groupId>com.tala</groupId>
+    <artifactId>tala-accounting</artifactId>
+    <version>1.0.0</version>
+    <!-- Settings used by the build. -->
+    <properties>
+        <!-- Compile for Java 17 (the app needs JDK 17 or newer). -->
+        <maven.compiler.release>17</maven.compiler.release>
+        <!-- Read the source files as UTF-8 so the peso sign is not corrupted. -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <!-- Libraries (jar files) the project needs. Maven downloads them automatically. -->
+    <dependencies>
+        <dependency>
+            <!-- MySQL JDBC driver: the library that lets Java talk to MySQL (used by DB.java). -->
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>9.5.0</version>
+        </dependency>
+    </dependencies>
+    <!-- Build tools (plugins) used to compile and run the project. -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <!-- Plugin that compiles the .java files (this is the 'compile' step in Run-TALA.bat). -->
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.14.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <!-- Plugin that runs the program (this is the 'exec:java' step in Run-TALA.bat). -->
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.5.0</version>
+                <configuration>
+                    <!-- Which class to start: Main.java in package com.tala (it contains the main method). -->
+                    <mainClass>com.tala.Main</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
