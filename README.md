@@ -6,10 +6,11 @@ Windows desktop accounting app. Java 17+, Swing, JDBC, MySQL.
 | Menu | Class | What it does |
 |---|---|---|
 | Dashboard | `DashboardPage` | Totals (assets, liabilities, revenue, expenses, net income), recent entries, and the **Reset Data** button |
-| Journal Entry | `JournalEntryPage` | Post a balanced debit/credit entry |
+| Journal Entry | `JournalEntryPage` | Post a balanced debit/credit entry, and **delete a single entry** from the Posted entries list (other data is untouched) |
+| General Journal | `GeneralJournalPage` | Every posted entry in date order (Date, Particulars, Post Ref, Debit, Credit) with explanation lines and a TOTAL row. Only accounts you used appear |
 | Chart of Accounts | `ChartOfAccountsPage` | List of all accounts |
-| Ledger | `GeneralLedgerPage` | Every posted debit and credit |
-| 12 Columnar | `TwelveColumnWorksheetPage` | Unadjusted TB, Adjustments, Adjusted TB, Income Statement, Balance Sheet on one page, with Grand Total and Balance Difference rows (should read ₱0.00) |
+| General Ledger | `GeneralLedgerPage` | A separate ledger for each account you used, two per row: transactions with running balance (DR/CR) and a **Total / ending balance** row. An Account drop-down shows just one |
+| 12 Columnar | `TwelveColumnWorksheetPage` | Unadjusted TB, Adjustments, Adjusted TB, Income Statement, Owner's Equity, Balance Sheet (6 Dr/Cr pairs = 12 columns). Starts empty and lists only accounts with posted entries. Grand Total and Balance Difference rows should read ₱0.00 |
 
 ## Requirements
 JDK 17+, Maven 3.9+, MySQL 8.0+
@@ -30,7 +31,7 @@ src/main/java/com/tala/
 ├── Main.java
 ├── db/DB.java
 ├── model/AccountOption.java
-├── service/  JournalService, ReportService, ResetDataService
+├── service/  JournalService, LedgerService, ReportService, ResetDataService, WorksheetService
 ├── util/Money.java
 └── ui/  MainFrame, BasePage, Theme (green palette), components/, pages/
 ```

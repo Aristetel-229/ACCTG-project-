@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- POM = Project Object Model: Maven reads this file to know how to build and run TALA. -->
+<!-- Root element; the namespace/schema attributes below let tools validate the file. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <!-- pom.xml = Maven's project file. It describes the project, its libraries and how to build and run it. -->
-    <!-- Version of the POM format itself (always 4.0.0 for Maven 3 and 4). -->
+    <!-- The POM format version; Maven 4.0.0 is the standard value. -->
     <modelVersion>4.0.0</modelVersion>
-    <!-- Project identity: groupId (like a company/package name), artifactId (project name), version. -->
+    <!-- Project identity: groupId = organization/package prefix, artifactId = project name, version = release number. -->
     <groupId>com.tala</groupId>
     <artifactId>tala-accounting</artifactId>
     <version>1.0.0</version>
-    <!-- Settings used by the build. -->
+    <!-- Settings reused by the build. -->
     <properties>
-        <!-- Compile for Java 17 (the app needs JDK 17 or newer). -->
+        <!-- Compile for Java 17 (needed for features like text blocks used in the code). -->
         <maven.compiler.release>17</maven.compiler.release>
-        <!-- Read the source files as UTF-8 so the peso sign is not corrupted. -->
+        <!-- Read source files as UTF-8 so symbols such as the peso sign display correctly. -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <!-- Libraries (jar files) the project needs. Maven downloads them automatically. -->
+    <!-- Libraries the app needs; Maven downloads them automatically. -->
     <dependencies>
+        <!-- MySQL JDBC driver: lets the Java code connect to the MySQL database that stores accounts and journal entries. -->
         <dependency>
-            <!-- MySQL JDBC driver: the library that lets Java talk to MySQL (used by DB.java). -->
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <version>9.5.0</version>
         </dependency>
     </dependencies>
-    <!-- Build tools (plugins) used to compile and run the project. -->
+    <!-- Build settings: which plugins run during compile and run. -->
     <build>
         <plugins>
+            <!-- Compiler plugin: turns the .java files into .class files (uses the Java 17 setting above). -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <!-- Plugin that compiles the .java files (this is the 'compile' step in Run-TALA.bat). -->
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.14.1</version>
             </plugin>
+            <!-- Exec plugin: lets us start the program with "mvn exec:java" (used by Run-TALA.bat). -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
-                <!-- Plugin that runs the program (this is the 'exec:java' step in Run-TALA.bat). -->
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.5.0</version>
                 <configuration>
-                    <!-- Which class to start: Main.java in package com.tala (it contains the main method). -->
+                    <!-- The class with the main() method that starts the application. -->
                     <mainClass>com.tala.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 </project>
-
