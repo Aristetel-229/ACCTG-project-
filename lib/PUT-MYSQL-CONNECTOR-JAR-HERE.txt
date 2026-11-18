@@ -1,0 +1,15 @@
+Put the MySQL JDBC driver jar in this folder, for example:
+
+    lib/mysql-connector-j-8.4.0.jar
+
+Where to get it:
+  https://dev.mysql.com/downloads/connector/j/
+  -> choose "Platform Independent" -> download the ZIP
+  -> open the ZIP and copy mysql-connector-j-<version>.jar here.
+
+NetBeans (Ant project): right-click Libraries -> Add JAR/Folder -> pick this jar.
+Maven (pom.xml): you do not need this folder; Maven downloads the driver itself.
+
+The connection settings (host, port, user, password) are NOT in a
+db.properties file. They are in Java:
+    src/main/java/tala/database/DBConnection.java
